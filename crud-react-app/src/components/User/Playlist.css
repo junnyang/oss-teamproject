@@ -1,0 +1,28 @@
+.playlist-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.error-text {
+  color: red;
+  font-weight: bold;
+}
+
+.table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.fa {
+  margin-right: 10px;
+  cursor: pointer;
+}
