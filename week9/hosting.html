@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      hoisting_test();
+
+      function hoisting_test() {
+        document.writeln("Hoisting!<br>");
+      }
+
+      hoisting_test();
+      var name;
+      console.log(name);
+      name = "Jerry";
+      console.log(name);
+
+      console.log(myVar); // undefined
+      var myVar = 10;
+      console.log(myVar); // 10
+
+      //console.log(name);
+      //let name = "JC";
+      //console.log(name);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+/* styles for Add component */
+
+/* Center-align the title */
+.title {
+  text-align: center;
+}
+
+/* Center-align the image */
+.album-cover-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.album-cover {
+  width: 150px;
+  height: 150px;
+  align-items: center;
+}
+
+/* Add spacing for buttons */
+.button-container {
+  margin-top: 20px;
+}
+
+.button-container button {
+  margin-right: 10px;
+}
+
+.songInfo {
+  align-items: center;
+}
+
+.Button-on-Info {
+  margin-right: 10px;
+  align-items: center;
+}
+
+#delete {
+  background-color: red; /* Red color for delete button */
+}

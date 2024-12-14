@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      const user = { name: "jerry", age: 20 };
+      window.onload = function () {
+        document.getElementById("demo").innerHTML = user;
+      };
+
+      function toJson() {
+        document.getElementById("demo").innerHTML = JSON.stringify(user);
+      }
+      function toJS() {
+        let jstr = document.getElementById("demo").innerHTML;
+        let obj = JSON.parse(jstr);
+        document.getElementById("user").innerHTML =
+          obj.name + "(" + obj.age + ")";
+      }
+    </script>
+  </head>
+  <body>
+    <h2>JS-JSON Test</h2>
+    <button onclick="toJson()">JSON.stringify()</button>
+    <p id="demo"></p>
+    <button onclick="toJS()">JSON.parse()</button>
+    <h3 id="user"></h3>
+  </body>
+</html>

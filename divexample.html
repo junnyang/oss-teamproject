@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      function changeStyle() {
+        let div2 = document.getElementById("div2");
+
+        if (div2.style.backgroundColor == "red")
+          div2.style.backgroundColor = "yellow";
+        else if (div2.style.backgroundColor == "yellow")
+          div2.style.backgroundColor = "green";
+        else div2.style.backgroundColor = "red";
+
+        div2.style.fontSize = "50px";
+      }
+
+      function expandDiv() {
+        let div = document.getElementById("div3");
+        if (!div.classList.contains("expanded")) {
+          div.classList.add("expanded");
+          if (!div.querySelector(img)) {
+            let img = document.createElment("img");
+            img.src =
+              "https://www.google.com/imgres?q=gksehdeo&imgurl=https%3A%2F%2Fi.namu.wiki%2Fi%2FCYsXdQdGlOACqAG_NoN45qvEC71vaRicVOSsLXnDVYyGLa_tQnjI7UdcY1XAXYbmoXLxmD8kaMCBTCOhHgnfMg.svg&imgrefurl=https%3A%2F%2Fnamu.wiki%2Fw%2F%25ED%2595%259C%25EB%258F%2599%25EB%258C%2580%25ED%2595%2599%25EA%25B5%2590&docid=yep5fCyI9yZqOM&tbnid=wHbJJipBYyhBOM&vet=12ahUKEwj9iqvovrWIAxU14zQHHXXNJcAQM3oECBYQAA..i&w=591&h=591&hcb=2&ved=2ahUKEwj9iqvovrWIAxU14zQHHXXNJcAQM3oECBYQAA";
+            div.appendChild(img);
+
+            //show image
+            let image = div.querySelector("img");
+            image.style.display = "block";
+          }
+        }
+      }
+    </script>
+    <style>
+      #div3 {
+        width: 200px;
+        height: 150px;
+        background-color: #fff;
+        border: 1px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: width 0.5s ease;
+        cursor: pointer;
+      }
+
+      #div3.expanded {
+        width: 400px;
+        height: 300px;
+      }
+
+      #div3 img {
+        display: none;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="div2" onmouseover="changeStyle()">Div2 area</div>
+    <div id="div3" onclick="expandDiv()">Div3 area</div>
+  </body>
+</html>

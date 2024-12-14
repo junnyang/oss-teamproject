@@ -1,0 +1,30 @@
+.nav-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  top: 0px;
+  background-color: #ddd;
+}
+
+.nav-item {
+  letter-spacing: 10px;
+  text-align: center;
+  width: 50%;
+  padding: 5px 0px;
+  font-size: 1.2rem;
+  background-color: #ddd;
+  transition: 0.3s;
+}
+
+.nav-item:hover {
+  transition: 0.3s;
+  background-color: #aaa;
+}
+
+.songInfo {
+  align-items: center;
+}
+
+.Button-on-Info {
+  margin-right: 10px;
+}

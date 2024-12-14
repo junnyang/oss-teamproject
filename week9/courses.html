@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .content {
+        width: 80%;
+        float: left;
+      }
+
+      div {
+        padding: 10px;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        //event.preventDefault();
+        //getStudents();
+        let btnCou = document.getElementById("btnCou");
+        let btnAdd = document.getElementById("btnAdd");
+        btnCou.addEventListener("click", function (event) {
+          //event.preventDefault();
+          getCourses();
+        });
+        btnAdd.addEventListener("click", function (event) {
+          event.preventDefault();
+          if (cname.value == "" || credit.value == "" || code.value == "") {
+            alert("Fill all blanks");
+          } else postData();
+        });
+      };
+
+      function getCourses() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://localhost:3001/courses");
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const res = JSON.parse(xhr.response);
+            contents.innerHTML = makeList(res);
+          } else {
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function postData() {
+        let cname = document.getElementById("cname");
+        let credit = document.getElementById("credit");
+        let code = document.getElementById("code");
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:3001/courses");
+        xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
+        const data = {
+          cname: cname.value,
+          credit: credit.value,
+          code: code.value,
+        };
+        xhr.send(JSON.stringify(data));
+
+        xhr.onload = () => {
+          if (xhr.status == 201) {
+            cname.value = "";
+            credit.value = "";
+            code.value = "";
+            const res = JSON.parse(xhr.response);
+            getCourses();
+          } else {
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function makeList(data) {
+        let str = "<ul>";
+        for (let key in data) {
+          str +=
+            "<li> " +
+            data[key].cname +
+            " (" +
+            data[key].credit +
+            ", " +
+            data[key].code +
+            ")</li>";
+          str +=
+            "<button onclick='updateData(\"" +
+            data[key].id +
+            "\")'>Modify</button>";
+          str +=
+            "<button onclick='deleteData(\"" +
+            data[key].id +
+            "\")'>Delete</button>";
+        }
+        str += "</ul>";
+
+        return str;
+      }
+
+      function updateData(id) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("PUT", "http://localhost:3001/courses/" + id);
+        xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
+        const data = { cname: "Studio", credit: 2, code: "ECE20027" };
+        xhr.send(JSON.stringify(data));
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const res = JSON.parse(xhr.response);
+            console.log(res);
+            getCourses();
+          } else {
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function deleteData(id) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("DELETE", "http://localhost:3001/courses/" + id);
+        xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const res = JSON.parse(xhr.response);
+            console.log(res);
+            getCourses();
+          } else {
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+    </script>
+  </head>
+
+  <body>
+    <button id="btnCou">Bring course data</button>
+    <div>
+      <input type="text" id="cname" size="5" placeholder="cname" />
+      <input type="text" id="credit" size="5" placeholder="credit" />
+      <input type="text" id="code" size="10" placeholder="code" />
+      <button id="btnAdd" type="button">Add course data</button>
+    </div>
+    <div
+      id="contents"
+      style="height: 200px; background-color: lightgoldenrodyellow"
+    ></div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Test event handler</h1>
+    <button onclick='alert("Event occured!")'>HTML inline event handler</button>
+    <button id="myBtn2">Event property in Javascript</button>
+    <button id="myBtn3">Event listener mothod tset in Javascript</button>
+
+    <script>
+        const button2 = document.getElementById("myBtn2");
+        button2.onclick = function() {
+            alert("Button2 event triggered!");
+        }
+
+        const button3 = document.getElementById("myBtn3");
+        button3.addEventListener("click", function(){
+            alert("First event triggered!");
+        })
+    </script>
+
+    <div>
+        <button id="add">Add</button>
+        <button id="del">Delete All</button>
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        const addButton = document.getElementById("add");
+        const delButton = document.getElementById("del");
+        const list = document.getElementById("list");
+        let count = 1;
+
+        function addNumber() {
+            let listItem = document.createElement("li");
+            listItem.textContent = count;
+            list.appendChild(listItem);
+            
+            //list.innerHTML = list.innerHTML + "<li>" + count + "</li>";
+            count++;
+        }
+
+        addButton.addEventListener("click", addNumber)
+
+        delButton.addEventListener("click", function(){
+            list.innerHTML = "";
+        });
+    </script>
+</body>
+</html>

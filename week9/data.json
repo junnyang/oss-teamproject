@@ -1,0 +1,23 @@
+{
+  "students": [
+    {
+      "name": "Sally",
+      "age": 10,
+      "id": "a997"
+    },
+    {
+      "name": "Sally",
+      "age": 10,
+      "id": "79b8"
+    },
+    {
+      "name": "Sally",
+      "age": 10,
+      "id": "5229"
+    }
+  ],
+  "courses": [
+    { "id": 1, "cname": "Open source studio", "credit": 3, "code": "ECE20026" },
+    { "id": 2, "cname": "Programming studio", "credit": 2, "code": "ECE20025" }
+  ]
+}

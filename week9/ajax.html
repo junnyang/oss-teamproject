@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .content {
+        width: 80%;
+        float: left;
+      }
+
+      div {
+        padding: 10px;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        //event.preventDefault();
+        //getStudents();
+        let btnStu = document.getElementById("btnStu");
+        let btnAdd = document.getElementById("btnAdd");
+        btnStu.addEventListener("click", function (event) {
+          //event.preventDefault();
+          getStudents();
+        });
+        btnAdd.addEventListener("click", function (event) {
+          event.preventDefault();
+          postData();
+        });
+      };
+
+      function getStudents() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://localhost:3001/students");
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const res = JSON.parse(xhr.response);
+            contents.innerHTML = makeList(res);
+          } else {
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function postData() {
+        let name = document.getElementById("name");
+        let age = document.getElementById("age");
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:3001/students");
+        xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
+        const data = { name: name.value, age: age.value };
+        xhr.send(JSON.stringify(data));
+
+        xhr.onload = () => {
+          if (xhr.status == 201) {
+            name.value = "";
+            age.value = "";
+            const res = JSON.parse(xhr.response);
+            getStudents();
+          } else {
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function makeList(data) {
+        let str = "<ul>";
+        for (key in data) {
+          //console.log("Name :" + data[key].name + " , age :" + data[key].age);
+          str += "<li> " + data[key].name + " (" + data[key].age + ")</li>";
+          str +=
+            "<button onclick='updateData(\"" +
+            data[key].id +
+            "\")'>Modify</button>";
+          str +=
+            "<button onclick='deleteData(\"" +
+            data[key].id +
+            "\")'>Delete</button>";
+        }
+        str += "</ul>";
+
+        return str;
+      }
+
+      function updateData(id) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("PUT", "http://localhost:3001/students/" + id);
+        xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
+        const data = { name: "Sally", age: 10 };
+        xhr.send(JSON.stringify(data));
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const res = JSON.parse(xhr.response);
+            console.log(res);
+            getStudents();
+          } else {
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function deleteData(id) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("DELETE", "http://localhost:3001/students/" + id);
+        xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const res = JSON.parse(xhr.response);
+            console.log(res);
+            getStudents();
+          } else {
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+    </script>
+  </head>
+
+  <body>
+    <button id="btnStu">Bring student data</button>
+    <div>
+      <input type="text" id="name" size="5" placeholder="name" />
+      <input type="text" id="age" size="5" placeholder="age" />
+      <button id="btnAdd" type="button">Add student data</button>
+    </div>
+    <div
+      id="contents"
+      style="height: 200px; background-color: lightgoldenrodyellow"
+    ></div>
+  </body>
+</html>

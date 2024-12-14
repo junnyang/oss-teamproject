@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      const fruits1 = ["Apple", 12.34, "Grape"];
+      const fruits1Sorted = fruits1.sort();
+
+      console.log(fruits1);
+
+      // array forEach
+      fruits1Sorted.forEach(function (item, index) {
+        const newIndex = index + 1;
+        console.log(`Index ${newIndex}: ${item}`);
+      });
+
+      fruits1.forEach((item, index) => {
+        console.log(`Index ${index}: ${item}`);
+      });
+
+      fruits1Sorted.push("Banana");
+
+      const fruits2 = [];
+      fruits2[0] = "Apple";
+      fruits2[1] = "Banana";
+      fruits2[2] = "Grape";
+
+      const fruit3 = new Array("Apple", "Banana", "Grape");
+
+      // Destructuring
+      const fruits = ["Bananas", "Oranges", "Apples", "Mangos"];
+      let [fruit1, fruit2] = fruits;
+      //let [fruit1, , , fruit2] = fruits1;
+      //let { [0]: fruit1, [1]: fruit2 } = fruits1;
+      const numbers = [1, 2, 3, 4, 5, 6, 7];
+      const [a, b, ...rest] = numbers;
+      console.log(rest);
+
+      const person = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 50,
+      };
+
+      // Destructuring
+      //let { lastName, firstName } = person;
+
+      // Default value
+      let { firstName, lastName, country = "US" } = person;
+
+      // Property alias
+      let { lastName: name } = person;
+      console.log(name);
+    </script>
+  </head>
+  <body></body>
+</html>
